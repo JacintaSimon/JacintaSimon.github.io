@@ -1,0 +1,225 @@
+html, body{
+	background-color: #7D1935;
+	color:white;
+}
+
+
+
+div.table{
+	color:white;
+	background-color: #7D1935;
+	text-align:center;
+}
+div.article {
+	background-color: #7D1935;
+	color: white;
+	text-align:center;
+	flex: 4;
+}
+
+div.article img {
+  border-radius: 200px;
+  max-width:300px;
+}
+
+/*FOOTER*/
+.footer {
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: black;
+   color: white;
+   text-align: center;
+}
+/*THE SOCIAL MEDIA LABELS*/
+.fa {
+  padding: 10px;
+  font-size: 30px;
+  width: 30px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+  border-radius: 50%;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+
+.fa-google {
+  background: #dd4b39;
+  color: white;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+}
+
+
+.fa-snapchat-ghost {
+  background: #fffc00;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.fa-skype {
+  background: #00aff0;
+  color: white;
+}
+
+
+.fa-yahoo {
+  background: #430297;
+  color: white;
+}
+
+
+/*THE GALLERY SECTION*/
+div.gallery {
+    margin: 116px;
+    float: left;
+    width: 180px;
+	background-color: #7D1935;
+	border: 3px solid #ccc
+}
+
+div.gallery:hover {
+    border: 1px solid #777;
+	background-color: #7D1935;
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+	background-color: #7D1935;
+	
+}
+
+div.desc {
+    padding: 16px;
+    text-align: center;
+	color:white;
+	background-color: #7D1935;
+}
+
+
+div.aside {
+  color:white;
+  margin-left: 9px;
+  padding: 1em;
+}
+
+div.aside, form {
+  float: left;
+  width: 50%;
+  margin-left: 60px;
+}
+
+/*BUTTON SETUP*/
+div.button {
+    background-color: #45A29E;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 16px;
+}
+
+div.button:hover {
+  background-color: #4CAF50;
+   opacity: 0.7;
+}
+
+div.buttons {
+  padding-top: 10rem;
+}
+
+
+/*GENERAL LAYOUT*/
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Times New Roman;
+	font-size: 20px;
+    margin: 0;
+}
+ a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #64485C;
+	
+}
+.header {
+    padding: 5px;
+    text-align: center;
+    background-color: #7D1935;
+    color: white;
+}
+
+
+.header h1 {
+	
+    font-size: 40px;
+}
+
+
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+}
+
+
+.navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Column container */
+.row {  
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+}
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media (max-width: 700px) {
+    .row {   
+        flex-direction: column;
+    }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media (max-width: 400px) {
+    .navbar a {
+        float: none;
+        width: 100%;
+    }
