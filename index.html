@@ -1,44 +1,725 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<title>My Personal Website</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="styles.css" rel="stylesheet" type="text/css" >
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Stephanie Simon — programmer and computer science educator with an MSc in Artificial Intelligence, based in Georgetown, Guyana. Case studies, career timeline and contact.">
+<meta name="author" content="Stephanie Simon">
+
+<link rel="canonical" href="https://jacintasimon.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Stephanie Simon — Programmer & Computer Science Educator">
+<meta property="og:description" content="Stephanie Simon — programmer and computer science educator with an MSc in Artificial Intelligence, based in Georgetown, Guyana. Case studies, career timeline and contact.">
+<meta property="og:url" content="https://jacintasimon.github.io/">
+<meta property="og:image" content="https://jacintasimon.github.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Stephanie Simon — Programmer & Computer Science Educator">
+<meta name="twitter:description" content="Stephanie Simon — programmer and computer science educator with an MSc in Artificial Intelligence, based in Georgetown, Guyana. Case studies, career timeline and contact.">
+<meta name="twitter:image" content="https://jacintasimon.github.io/og-image.png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#07070d">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Stephanie Simon Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single scrolling page — sticky nav, hero, 3-col project grid, two-column about + timeline, contact form.
+   Two looks share one structure: "Pastel" (light, airy) and "Neon" (dark, green glow). */
+:root{
+  --bg:#fbfaf8; --surface:#ffffff; --fg:#22212a; --muted:#6f6c7b; --line:#ebe8ef;
+  --accent:#8e7bd8; --accent2:#7fa8e6; --str:#2a7a9e; --accent-soft:#ece7fb; --accent-ink:#ffffff;
+  --p1:#fde2e4; --p2:#dff3ea; --p3:#e3ecfb; --p4:#fdf1d8; --p5:#efe5fb; --p6:#dcf1f4;
+  --glow:none; --radius:14px; --head-w:500; --sec-pad:clamp(72px,10vw,128px);
+  --display:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#07070d; --surface:#0f0f1a; --fg:#ecebff; --muted:#8f8daa; --line:#1f1d33;
+  --accent:#8c6bff; --accent2:#2fc8ff; --str:#5fd6ff; --accent-soft:rgba(140,107,255,.14); --accent-ink:#ffffff;
+  --p1:#121026; --p2:#0e1426; --p3:#121026; --p4:#0e1426; --p5:#121026; --p6:#0e1426;
+  --glow:0 0 24px rgba(140,107,255,.45); --glow-f:0 0 14px rgba(140,107,255,.5); --radius:6px; --head-w:600; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#07070d; --surface:#0f0f1a; --fg:#ecebff; --muted:#8f8daa; --line:#1f1d33;
+  --accent:#8c6bff; --accent2:#2fc8ff; --str:#5fd6ff; --accent-soft:rgba(140,107,255,.14); --accent-ink:#ffffff;
+  --p1:#121026; --p2:#0e1426; --p3:#121026; --p4:#0e1426; --p5:#121026; --p6:#0e1426;
+  --glow:0 0 24px rgba(140,107,255,.45); --glow-f:0 0 14px rgba(140,107,255,.5); --radius:6px; --head-w:600; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font:400 16px/1.65 var(--body);-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:var(--head-w);letter-spacing:-.02em;text-wrap:balance;margin:0}
+.label{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* nav */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.logo{font:600 15px var(--mono);text-decoration:none;display:flex;align-items:center;gap:8px}
+.logo b{color:var(--accent);text-shadow:var(--glow)}
+.links{display:flex;gap:22px;align-items:center}
+.links a{text-decoration:none;color:var(--muted);font-size:14px}
+.links a:hover{color:var(--fg)}
+.toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surface)}
+.toggle button{all:unset;cursor:pointer;font:500 12px var(--mono);padding:6px 12px;border-radius:999px;color:var(--muted)}
+.toggle button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);box-shadow:var(--glow)}
+@media (max-width:720px){.links a{display:none}}
+
+/* hero */
+.hero{padding-block:clamp(64px,11vw,140px) clamp(48px,7vw,88px)}
+.status{display:inline-flex;align-items:center;gap:8px;font:500 13px var(--mono);color:var(--muted);margin-bottom:28px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:var(--glow);animation:pulse 2.4s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.hero h1{font-size:clamp(40px,7.2vw,88px);line-height:1.02;max-width:14ch}
+.hero h1 em{font-style:normal;color:var(--accent);background:linear-gradient(90deg,var(--accent2),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(var(--glow-f,0 0 0 transparent))}
+.bio{max-width:56ch;color:var(--muted);font-size:clamp(17px,1.6vw,19px);margin:28px 0 20px}
+.mission{max-width:58ch;margin:0 0 36px;padding-left:18px;border-left:2px solid var(--accent);font-size:clamp(16px,1.4vw,17.5px);color:var(--fg)}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font:500 15px var(--body);text-decoration:none;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.btn.primary{background:linear-gradient(90deg,var(--accent2),var(--accent));color:var(--accent-ink);border-color:var(--accent);box-shadow:var(--glow)}
+.btn:hover{transform:translateY(-1px)}
+.stack{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:56px;padding-top:24px;border-top:1px solid var(--line);font:400 13px var(--mono);color:var(--muted)}
+
+section{padding-block:var(--sec-pad);border-top:1px solid var(--line)}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:48px}
+.sec-head h2{font-size:clamp(30px,4.2vw,48px);margin-top:12px}
+.sec-head p{max-width:42ch;color:var(--muted);margin:0}
+
+/* projects */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px}
+@media (max-width:600px){.grid{grid-template-columns:1fr}}
+.card{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:16px;min-width:0}
+.thumb{aspect-ratio:4/3;max-width:100%;border-radius:var(--radius);border:1px solid var(--line);position:relative;overflow:hidden;padding:18px;display:flex;flex-direction:column;gap:8px;transition:transform .3s,box-shadow .3s}
+.card:hover .thumb,.card:focus-visible .thumb{transform:translateY(-4px);box-shadow:var(--glow),0 12px 30px -18px rgba(0,0,0,.25)}
+.card:focus-visible{outline:none}.card:focus-visible .thumb{outline:2px solid var(--accent);outline-offset:3px}
+.bar{height:8px;border-radius:4px;background:var(--fg);opacity:.12}
+.blk{border-radius:6px;background:var(--surface);border:1px solid var(--line)}
+.acc{background:var(--accent);opacity:.85;border-radius:4px}
+.meta{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.card h3{font-size:20px}
+.card p{margin:4px 0 0;color:var(--muted);font-size:15px}
+.yr{font:400 12px var(--mono);color:var(--muted);white-space:nowrap}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font:400 11.5px var(--mono);padding:3px 9px;border-radius:999px;background:var(--accent-soft);color:var(--fg)}
+
+/* about */
+.about{display:grid;grid-template-columns:1fr 1.25fr;gap:clamp(32px,6vw,88px)}
+@media (max-width:860px){.about{grid-template-columns:1fr}}
+.portrait{display:block;width:160px;height:160px;border-radius:50%;object-fit:cover;margin-bottom:28px;border:3px solid var(--accent);box-shadow:var(--glow),0 0 0 6px var(--accent-soft)}
+.about-text p{color:var(--muted);max-width:52ch}
+.about-text p:first-of-type{color:var(--fg);font-size:19px}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px;padding-top:24px;border-top:1px solid var(--line)}
+.facts strong{display:block;font:500 28px var(--display);color:var(--accent);text-shadow:var(--glow);font-variant-numeric:tabular-nums}
+.facts span{font-size:13px;color:var(--muted)}
+.timeline{list-style:none;margin:0;padding:0;position:relative}
+.timeline::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:var(--line)}
+.timeline li{position:relative;padding:0 0 36px 36px}
+.timeline li:last-child{padding-bottom:0}
+.timeline li::before{content:"";position:absolute;left:0;top:7px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--muted)}
+.timeline li.now::before{background:var(--accent);border-color:var(--accent);box-shadow:var(--glow)}
+.when{font:400 12.5px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.timeline h3{font-size:18px;margin-top:4px}
+.timeline .org{color:var(--accent);font-weight:500}
+.timeline p{margin:6px 0 0;color:var(--muted);font-size:15px;max-width:52ch}
+
+
+.thumb.has-img{padding:0}
+.thumb.has-img img{width:100%;height:100%;object-fit:cover;object-position:center 38%;display:block}
+.gal{display:grid;grid-template-columns:1fr 2fr;gap:12px}
+.gal figure:nth-child(3){grid-column:1/-1}
+.gal figure{margin:0;min-width:0}
+.gal.stack{grid-template-columns:1fr}
+.gal.stack figure:nth-child(4) img{max-width:420px}
+.thumb.has-img img[src*="fin-"]{object-position:left top}
+.thumb.has-img img[src*="card-gen"]{object-position:61% center}
+.gal img{width:100%;height:auto;display:block;border-radius:calc(var(--radius) * .6);border:1px solid var(--line)}
+.gal figcaption{font-size:12.5px;color:var(--muted);margin-top:6px}
+@media (max-width:560px){.gal{grid-template-columns:1fr}}
+/* community & teaching */
+.roles{display:grid;grid-template-columns:repeat(2,1fr);gap:0 clamp(24px,5vw,64px);border-top:1px solid var(--line)}
+@media (max-width:720px){.roles{grid-template-columns:1fr}}
+.role{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;padding-block:22px;border-bottom:1px solid var(--line);min-width:0}
+.role .mk{grid-row:span 2;width:10px;height:10px;margin-top:8px;border-radius:50%;background:var(--accent);box-shadow:var(--glow)}
+.role h3{font-size:18px}
+.role p{margin:0;color:var(--muted);font-size:15px}
+.subgrid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,88px);margin-top:clamp(48px,7vw,80px)}
+@media (max-width:860px){.subgrid{grid-template-columns:1fr}}
+.subgrid h3{font-size:22px;margin:12px 0 16px}
+.subgrid > div > p{color:var(--muted);margin:0 0 18px;max-width:52ch}
+.courses{display:flex;flex-wrap:wrap;gap:8px}
+.course{font:500 13px var(--mono);padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.course.hl{border-color:var(--accent);color:var(--accent)}
+.past{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.past li{display:grid;grid-template-columns:4.5rem 1fr;gap:12px;font-size:15px;color:var(--muted)}
+.past .y{font:400 13px var(--mono);color:var(--fg);font-variant-numeric:tabular-nums;padding-top:1px}
+
+/* media */
+.media{display:grid;gap:24px}
+.vid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--surface);text-decoration:none;color:inherit;transition:transform .3s,box-shadow .3s}
+.vid:hover{transform:translateY(-3px);box-shadow:var(--glow),0 14px 32px -20px rgba(0,0,0,.3)}
+@media (max-width:720px){.vid{grid-template-columns:1fr}}
+.vid-art{position:relative;min-height:220px;display:grid;place-items:center;background:radial-gradient(circle at 30% 25%,var(--accent-soft),transparent 60%),linear-gradient(135deg,var(--p3),var(--p5))}
+.play{width:72px;height:72px;border-radius:50%;background:linear-gradient(90deg,var(--accent2),var(--accent));box-shadow:var(--glow);position:relative}
+.play::after{content:"";position:absolute;left:29px;top:22px;border-style:solid;border-width:14px 0 14px 22px;border-color:transparent transparent transparent var(--accent-ink)}
+.vid-src{position:absolute;left:16px;bottom:14px;font:500 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.vid-body{display:grid;gap:10px;align-content:center;padding:clamp(22px,3.5vw,40px);min-width:0}
+.vid-title{font:var(--head-w) clamp(24px,3vw,32px)/1.15 var(--display);letter-spacing:-.02em}
+.vid-desc{color:var(--muted);max-width:56ch}
+.vid-cta{font:500 14px var(--mono);color:var(--accent);margin-top:4px}
+/* press */
+.press{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.press a{display:grid;grid-template-columns:4.5rem 1fr auto;gap:16px;align-items:baseline;padding-block:20px;border-bottom:1px solid var(--line);text-decoration:none;transition:padding .2s}
+.press a:hover{padding-left:8px}
+.press a:hover .ph{color:var(--accent)}
+.py{font:400 13px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.pt{display:grid;gap:4px;min-width:0}
+.po{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.ph{font:500 clamp(17px,1.8vw,20px)/1.35 var(--display);color:var(--fg);text-wrap:balance;transition:color .2s}
+.pa{color:var(--muted);font-size:18px}
+@media (max-width:520px){.press a{grid-template-columns:1fr auto}.py{grid-column:1/-1}}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(32px,6vw,88px)}
+@media (max-width:860px){.contact{grid-template-columns:1fr}}
+.contact h2{font-size:clamp(34px,5vw,56px);margin:12px 0 20px}
+.contact-side p{color:var(--muted);max-width:40ch}
+.email-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:24px;font:500 15px var(--mono)}
+.email-row code{font:inherit;color:var(--fg);user-select:all}
+.copy{all:unset;cursor:pointer;font:500 12px var(--mono);padding:5px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.copy:hover{color:var(--fg)}
+form{position:relative;display:grid;gap:18px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,3vw,32px)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:520px){.row{grid-template-columns:1fr}}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+input,select,textarea{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:calc(var(--radius) * .6);padding:12px 14px;width:100%}
+textarea{min-height:140px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.err{font-size:13px;color:#d0516a;min-height:0}
+.err:empty{display:none}
+.form-foot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.note{font-size:13px;color:var(--muted);margin:0}
+.done{border:1px solid var(--accent);background:var(--accent-soft);border-radius:calc(var(--radius) * .6);padding:14px 16px;font-size:14.5px}
+.soc a{text-decoration:none}.soc a:hover{color:var(--accent)}
+.linkbtn{all:unset;cursor:pointer;color:inherit;text-decoration:underline;text-underline-offset:3px}
+.linkbtn:hover{color:var(--accent)}
+.linkbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+footer{border-top:1px solid var(--line);padding-block:32px;font:400 13px var(--mono);color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+/* case study dialog */
+dialog{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);color:var(--fg);padding:0;width:min(720px,calc(100vw - 32px));max-height:min(86vh,900px)}
+dialog::backdrop{background:rgba(10,10,14,.55);backdrop-filter:blur(3px)}
+.dlg{padding:clamp(24px,4vw,40px);display:grid;gap:20px}
+.dlg h3{font-size:clamp(26px,3.5vw,34px)}
+.dlg .lede{color:var(--muted);margin:0;font-size:17px}
+.cs{display:grid;gap:18px}
+.cs h4{margin:0 0 4px;font:500 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.cs p{margin:0;color:var(--fg)}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.kpi{border:1px solid var(--line);border-radius:calc(var(--radius) * .6);padding:12px 14px}
+.kpi strong{display:block;font:600 22px var(--display);font-variant-numeric:tabular-nums}
+.kpi span{font-size:12.5px;color:var(--muted)}
+@media (max-width:520px){.kpis{grid-template-columns:1fr}}
+.close{all:unset;cursor:pointer;justify-self:end;font:500 13px var(--mono);color:var(--muted);padding:4px 8px;border:1px solid var(--line);border-radius:999px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+/* ---------- motion & polish ---------- */
+nav{transition:box-shadow .3s,background .3s}
+nav.scrolled{box-shadow:0 10px 30px -22px rgba(0,0,0,.45)}
+.nav-prog{position:absolute;left:0;bottom:-1px;height:2px;width:100%;transform-origin:left;transform:scaleX(var(--p,0));background:linear-gradient(90deg,var(--accent2),var(--accent));box-shadow:var(--glow)}
+.links a{position:relative;transition:color .2s}
+.links a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--accent2),var(--accent));transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.links a:hover::after,.links a[aria-current="true"]::after{transform:scaleX(1)}
+.links a[aria-current="true"]{color:var(--fg)}
+
+.hero{position:relative;overflow:hidden;padding-block:0}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 35%,#000 30%,transparent 75%);mask-image:radial-gradient(ellipse 70% 60% at 50% 35%,#000 30%,transparent 75%);opacity:.7;pointer-events:none}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(480px circle at var(--hx,70%) var(--hy,30%),var(--accent-soft),transparent 70%);pointer-events:none;transition:background .2s}
+.aurora{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.aurora span{position:absolute;border-radius:50%;filter:blur(70px);opacity:.38}
+.aurora .b1{width:42vw;height:42vw;max-width:560px;max-height:560px;left:-8%;top:-18%;background:var(--accent);animation:drift1 18s ease-in-out infinite alternate}
+.aurora .b2{width:36vw;height:36vw;max-width:480px;max-height:480px;right:-6%;top:6%;background:var(--accent2);animation:drift2 22s ease-in-out infinite alternate}
+.aurora .b3{width:30vw;height:30vw;max-width:400px;max-height:400px;left:38%;bottom:-20%;background:var(--p5);opacity:.5;animation:drift1 26s ease-in-out infinite alternate-reverse}
+@keyframes drift1{to{transform:translate(12%,14%) scale(1.15)}}
+@keyframes drift2{to{transform:translate(-16%,10%) scale(.9)}}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(32px,5vw,72px);align-items:center;padding-block:clamp(56px,9vw,120px) clamp(40px,6vw,72px)}
+@media (max-width:960px){.hero-grid{grid-template-columns:1fr}}
+.hero-copy{min-width:0}
+.hero h1{font-size:clamp(40px,5.4vw,68px)}
+.rotator{font:500 clamp(16px,1.6vw,19px) var(--mono);color:var(--fg);margin:22px 0 0;display:flex;align-items:center;gap:8px;min-height:1.6em}
+.rotator .prompt{color:var(--accent)}
+#rot{background:linear-gradient(90deg,var(--accent2),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.caret{display:inline-block;width:.55em;height:1.1em;margin-left:2px;vertical-align:-.15em;background:var(--accent);animation:blink 1s steps(1) infinite;box-shadow:var(--glow)}
+@keyframes blink{50%{opacity:0}}
+.bio{margin-top:20px}
+
+.code-card{margin:0;min-width:0;border:1px solid var(--line);border-radius:var(--radius);background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(8px);box-shadow:var(--glow),0 30px 60px -36px rgba(0,0,0,.45);animation:float 7s ease-in-out infinite;overflow:hidden}
+@keyframes float{50%{transform:translateY(-10px)}}
+.code-bar{display:flex;align-items:center;gap:7px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.code-bar span{width:11px;height:11px;border-radius:50%;background:var(--line)}
+.code-bar span:nth-child(1){background:#ff6b81}.code-bar span:nth-child(2){background:#ffc65c}.code-bar span:nth-child(3){background:#4cd98b}
+.code-bar em{font:400 12px var(--mono);font-style:normal;color:var(--muted);margin-left:8px}
+.code-card pre{margin:0;padding:20px 22px 24px;overflow-x:auto;font:400 clamp(12.5px,1.15vw,14px)/1.75 var(--mono);color:var(--fg)}
+.code-card .kw{color:var(--accent);font-weight:500}
+.code-card .fn{color:var(--fg);font-weight:600}
+.code-card .st{color:var(--str)}
+.code-card .cm{color:var(--muted);font-style:italic}
+
+.marquee{position:relative;z-index:1;border-block:1px solid var(--line);padding-block:18px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;width:max-content;animation:marquee 45s linear infinite}
+.marquee:hover .track{animation-play-state:paused}
+.set{display:flex;gap:44px;padding-right:44px}
+.set span{font:500 14px var(--mono);color:var(--muted);white-space:nowrap;display:flex;align-items:center;gap:44px}
+.set span::after{content:"✦";color:var(--accent);font-size:11px}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+.card .thumb{transform-style:preserve-3d;will-change:transform}
+.thumb::after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--accent) 28%,transparent),transparent 65%);opacity:0;transition:opacity .3s;pointer-events:none}
+.card:hover .thumb::after{opacity:1}
+.thumb.has-img img{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.card:hover .thumb.has-img img{transform:scale(1.05)}
+.card h3{transition:color .2s}.card:hover h3{color:var(--accent)}
+
+.btn{transition:transform .2s,box-shadow .2s,background-position .5s}
+.btn.primary{background-size:200% 100%;background-image:linear-gradient(90deg,var(--accent2),var(--accent),var(--accent2))}
+.btn.primary:hover{background-position:100% 0;box-shadow:var(--glow),0 10px 24px -12px var(--accent)}
+
+.timeline{--tl:0}
+.timeline::after{content:"";position:absolute;left:5px;top:8px;width:1px;height:calc((100% - 16px) * var(--tl));background:linear-gradient(var(--accent2),var(--accent));box-shadow:var(--glow)}
+.portrait{transition:transform .4s}.portrait:hover{transform:rotate(-3deg) scale(1.03)}
+.role{transition:background .25s,padding .25s}
+.role:hover{background:var(--accent-soft);padding-inline:12px}
+
+.reveal-in{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(28px)}}
+
+@media (prefers-reduced-motion:reduce){
+  .track{width:auto}.set{flex-wrap:wrap;gap:10px 28px}.set[aria-hidden]{display:none}
+  .set span::after{display:none}
+}
+</style>
 </head>
 <body>
+<nav aria-label="Main" id="nav"><span class="nav-prog" aria-hidden="true"></span>
+  <div class="wrap">
+    <a class="logo" href="#top"><b>&lt;/&gt;</b> stephanie.simon</a>
+    <div class="links">
+      <a href="#work">Work</a><a href="#about">About</a><a href="#community">Community</a><a href="#media">Media</a><a href="#press">Press</a><a href="#contact">Contact</a>
+      <div class="toggle" role="group" aria-label="Visual style">
+        <button type="button" id="t-light" data-set="light" aria-pressed="false">Pastel</button>
+        <button type="button" id="t-dark" data-set="dark" aria-pressed="false">Neon</button>
+      </div>
+    </div>
+  </div>
+</nav>
 
-<div class="header">
-  <h1>Stephanie J. Simon</h1>
-</div>
+<main id="top">
+  <header class="hero" id="hero">
+    <div class="aurora" aria-hidden="true"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="status"><span class="dot"></span> Georgetown, Guyana · Open to development and AI-in-education work</div>
+        <h1>I build software that makes learning <em>clearer</em>.</h1>
+        <p class="rotator" aria-label="Programmer, computer science educator, AI-in-education researcher and STEM community builder"><span class="prompt" aria-hidden="true">&gt;</span> <span id="rot" aria-hidden="true">programmer</span><span class="caret" aria-hidden="true"></span></p>
+        <p class="bio">I am Stephanie Simon, a programmer and computer science educator with an MSc in Artificial Intelligence. I build web interfaces, databases and AI-assisted learning tools, and I have taught computer science at the University of Guyana since 2019.</p>
+        <p class="mission">My work is driven by a simple conviction: that access to quality STEM education should not depend on where a student lives. Through teaching, community programmes and human-centred AI, I aim to equip the next generation of Caribbean learners to build, question and lead with technology.</p>
+        <div class="ctas">
+      <a class="btn primary" href="#work">View case studies →</a>
+      <a class="btn" href="#contact">Get in touch</a>
+    </div>
+      </div>
+      <figure class="code-card" aria-label="A short Python class summarising Stephanie's profile">
+        <div class="code-bar"><span></span><span></span><span></span><em>stephanie.py</em></div>
+<pre><code><span class="cm"># human-centred, built in Guyana</span>
+<span class="kw">class</span> <span class="fn">Stephanie</span>(Programmer, Educator):
+    based_in = <span class="st">"Georgetown, Guyana"</span>
+    degree   = <span class="st">"MSc Artificial Intelligence"</span>
+    focus    = [<span class="st">"human-centred AI"</span>,
+                <span class="st">"STEM education"</span>,
+                <span class="st">"full-stack web"</span>]
 
-<div class="navbar">
-  <a class= "active" href="index.html">Home</a>
-  <a href="Profile.html">Profile</a>
-  <a href="Experience.html">Experience</a>
-  <a href="Portfolio.html">Portfolio</a>
-  <a href="Gallery.html">Gallery</a>
-  <a href="Contact.html">Contact</a>
-</div>
+    <span class="kw">def</span> <span class="fn">mission</span>(self):
+        <span class="kw">return</span> <span class="st">"equip Caribbean learners"</span><span class="caret"></span></code></pre>
+      </figure>
+    </div>
+    <div class="marquee" aria-label="Core stack">
+      <div class="track"><div class="set"><span>HTML / CSS / JavaScript</span><span>React</span><span>Python</span><span>FastAPI</span><span>PostgreSQL</span><span>SQL / MySQL</span><span>Docker</span><span>C</span><span>WordPress &amp; Elementor</span><span>Google Cloud &amp; Vertex AI</span><span>Canva</span></div><div class="set" aria-hidden="true"><span>HTML / CSS / JavaScript</span><span>React</span><span>Python</span><span>FastAPI</span><span>PostgreSQL</span><span>SQL / MySQL</span><span>Docker</span><span>C</span><span>WordPress &amp; Elementor</span><span>Google Cloud &amp; Vertex AI</span><span>Canva</span></div></div>
+    </div>
+  </header>
 
-<div class="article">
-<a><img src="picture1.jpg" width="300" height="300" alt="Butterflyqueen"></a>
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="label">Selected work</span><h2>Four case studies</h2></div>
+        <p>Each project outlines the problem, my role, the approach taken and the result. Select a card to read the full case study.</p>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
 
-<p> Hi I'm Stephanie Simon.I'm arobotics and Information technology teacher, certified STEM Guyana Master Trainer,<br>and currently a Computer Science Major at the University of Guyana (Turkeyen Campus).</p>
-<h3>Interest.</h3>
-<p>I'm very passionate about learning different languages and cultural astronomy (study of ancient societies and culture). <br>I can speak Spanish, mandarin and japanese, currently studying mandarin.</p>
-<p><i><b> <br>"If you don't stand for something in this life you're gonna fall for anything" <br> -Stephanie J.Simon</b></i> </p>
+  <section id="about">
+    <div class="wrap about">
+      <div class="about-text">
+        <img class="portrait" src="img/stephanie.webp" alt="Portrait of Stephanie Simon" width="160" height="160">
+        <span class="label">About</span>
+        <h2 style="font-size:clamp(30px,4.2vw,48px);margin:12px 0 24px">Programmer, educator and STEM advocate.</h2>
+        <p>I combine software development with a long-standing commitment to widening access to computer science education in Guyana and the Caribbean.</p>
+        <p>As a Junior Programmer at the Guyana Defence Force, I work on software programming, database development and maintenance, telecommunications and networking. At the University of Guyana, I teach and develop lab materials across programming, databases, digital logic and artificial intelligence. My MSc research examined how a human-centred AI peer assistant can support mathematical learning and reduce cognitive load in primary school students.</p>
+        <div class="facts">
+          <div><strong>2019</strong><span>teaching at UG since</span></div>
+          <div><strong>8</strong><span>university courses taught</span></div>
+          <div><strong>MSc</strong><span>Artificial Intelligence</span></div>
+        </div>
+        <div style="margin-top:32px"><span class="label">Recognition</span>
+          <ul style="margin:14px 0 0;padding-left:18px;color:var(--muted);font-size:15px;display:grid;gap:6px">
+            <li>Diana Award (2023)</li>
+            <li>Ignite Caribbean 30 Under 30 Emerging Caribbean American Leaders Award (2022)</li>
+            <li>25 Influential Women Leaders Award (2021)</li>
+            <li>STEMedia Technologist of the Year nominee (2021)</li>
+            <li>She Plus Tech x Coursera Scholarship</li>
+          </ul></div>
+      </div>
+      <div>
+        <span class="label">Career timeline</span>
+        <ol class="timeline" style="margin-top:28px">
+          <li class="now"><span class="when">Nov 2019 — Present</span><h3>Junior Programmer · <span class="org">Guyana Defence Force</span></h3><p>Software programming, database programming and maintenance, telecommunications and computer networking.</p></li>
+          <li class="now"><span class="when">Aug 2019 — Present</span><h3>Social Media Marketing Manager · <span class="org">Trifinity Solutions Inc.</span></h3><p>Part-time role helping clients grow their businesses online through content and digital strategy.</p></li>
+          <li><h3>MSc Artificial Intelligence · <span class="org">IU International University of Applied Sciences</span></h3><p>Studied through the GOAL Scholarship. Thesis on a human-centred AI peer assistant for primary school mathematics.</p></li>
+          <li class="now"><span class="when">2019 — Present</span><h3>Academic Tutor · <span class="org">University of Guyana, Computer Science</span></h3><p>Taught CSE 1100, CSE 1200, CSE 1201, CSE 4101 (Artificial Intelligence), ITE 1100, ITE 1200, UGC 1101 and UGC 1201; design and grade lab materials in SQL, R, C and database design.</p></li>
+          <li><h3>BSc Computer Science · <span class="org">University of Guyana</span></h3><p>Co-founded the UG Robotics Club and the CS-Tech Ed Rev Club.</p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
 
-<div class="footer">
-<a href="#" class="fa fa-facebook"></a>
-<a href="#" class="fa fa-instagram"></a>
-<a href="#" class="fa fa-linkedin"></a>
-<a href="#" class="fa fa-snapchat-ghost"></a>
-<a href="#" class="fa fa-yahoo"></a>
-<a href="#" class="fa fa-skype"></a>
-<a href="#" class="fa fa-google"></a>
-</div>
-</div>
+  <section id="community">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="label">Community &amp; Teaching</span><h2>Building the next generation of technologists</h2></div>
+        <p>Alongside my technical work, I lead initiatives that widen access to computing and STEM education across Guyana and the Caribbean.</p>
+      </div>
+      <div class="roles">
+        <div class="role"><span class="mk"></span><h3>Co-Founder · Stemmy Conversations</h3><p>A STEM education podcast and initiative that makes science and technology conversations accessible to young people.</p></div>
+        <div class="role"><span class="mk"></span><h3>Coordinator · Guyanese Girls Code</h3><p>Coordinate a coding programme for girls, having previously served as a mentor in 2019 and 2021.</p></div>
+        <div class="role"><span class="mk"></span><h3>Women Techmakers Ambassador</h3><p>Support visibility, community and professional growth for women in technology in Guyana.</p></div>
+        <div class="role"><span class="mk"></span><h3>Co-Organizer · Google Developer Group Guyana</h3><p>Help organise events and learning opportunities for the local developer community.</p></div>
+        <div class="role"><span class="mk"></span><h3>Co-Chair · Ignite Caribbean 30 Under 30</h3><p>Co-chair the Changemakers Award recognising emerging Caribbean leaders.</p></div>
+        <div class="role"><span class="mk"></span><h3>Co-Founder · UG Robotics &amp; CS-Tech Ed Rev Clubs</h3><p>Established student clubs at the University of Guyana for robotics and technology education.</p></div>
+      </div>
+      <div class="subgrid">
+        <div>
+          <span class="label">University teaching</span>
+          <h3>Courses taught at the University of Guyana</h3>
+          <p>Since 2019, I have taught and developed lab materials covering programming in C, SQL and database design, R, digital logic, Excel data analysis and artificial intelligence.</p>
+          <div class="courses">
+            <span class="course hl">CSE 4101 · Artificial Intelligence</span><span class="course">CSE 1100</span><span class="course">CSE 1200</span><span class="course">CSE 1201</span><span class="course">ITE 1100</span><span class="course">ITE 1200</span><span class="course">UGC 1101</span><span class="course">UGC 1201</span>
+          </div>
+        </div>
+        <div>
+          <span class="label">Selected engagements</span>
+          <h3>Mentoring and representation</h3>
+          <ul class="past">
+            <li><span class="y">2023</span><span>Youth Participant, CSW67 at the United Nations, as part of Guyana's delegation</span></li>
+            <li><span class="y">2018</span><span>Team Mentor, FIRST Global Challenge, Mexico City</span></li>
+            <li><span class="y">2018</span><span>Coach, Guyana national team, International Youth Robotics Competition</span></li>
+            <li><span class="y">2018</span><span>Master Trainer, STEM Guyana</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="media">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="label">Talks &amp; Media</span><h2>Speaking and outreach</h2></div>
+        <p>Talks and appearances where I share my path into technology and encourage young people to pursue STEM.</p>
+      </div>
+      <div class="media">
+        <a class="vid" href="https://www.facebook.com/humanservicesgy/videos/watch-now-arrianna-mahase-stephanie-simon-and-maryam-bacchus-young-guyanese-ict-/579864814080245/" target="_blank" rel="noopener">
+          <span class="vid-art" aria-hidden="true"><span class="play"></span><span class="vid-src">Video · Facebook</span></span>
+          <span class="vid-body">
+            <span class="po">United Nations Headquarters, New York · CSW67 · 2023</span>
+            <span class="vid-title">Youth Dialogue at the UN Commission on the Status of Women</span>
+            <span class="vid-desc">Presented alongside fellow young Guyanese ICT professionals Arrianna Mahase and Maryam Bacchus at the CSW67 Youth Dialogue, themed "Innovation and Technological Change and Education in the Digital Age for Achieving Equality and the Empowerment of Women and Girls," as part of Dr. Vindhya Persaud's delegation representing Guyana.</span>
+            <span class="vid-cta">Watch video ↗</span>
+          </span>
+        </a>
+        <a class="vid" href="https://www.facebook.com/humanservicesgy/videos/stephanie-simon-young-women-in-ict/746452383769484/" target="_blank" rel="noopener">
+          <span class="vid-art" aria-hidden="true"><span class="play"></span><span class="vid-src">Video · Facebook</span></span>
+          <span class="vid-body">
+            <span class="po">Ministry of Human Services &amp; Social Security · 2023</span>
+            <span class="vid-title">Young Women in ICT</span>
+            <span class="vid-desc">Shared my story with young women at the Sophia Care Centre during the "Women of Tomorrow, Today" event commemorating International Women's Day, shortly after presenting at the UN's 67th Commission on the Status of Women (CSW67) in New York as part of Guyana's delegation of young women in ICT.</span>
+            <span class="vid-cta">Watch video ↗</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="press">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="label">In the News</span><h2>Press &amp; features</h2></div>
+        <p>Coverage of my work in STEM education, community programmes and recognition, from 2018 to the present.</p>
+      </div>
+      <ul class="press">
+        <li><a href="https://www.hgptv.com/guyanese-duo-wins-prestigious-diana-award/" target="_blank" rel="noopener"><span class="py">2023</span><span class="pt"><span class="po">HGPTV</span><span class="ph">Guyanese duo wins prestigious Diana Award</span></span><span class="pa" aria-hidden="true">↗</span></a></li>
+        <li><a href="https://villagevoicenews.com/2023/01/12/young-trio-aiming-to-expose-persons-to-stem-and-ict-opportunities-via-stemmy-conversations-podcast/" target="_blank" rel="noopener"><span class="py">2023</span><span class="pt"><span class="po">Village Voice</span><span class="ph">Young trio aiming to expose persons to STEM and ICT opportunities via Stemmy Conversations podcast</span></span><span class="pa" aria-hidden="true">↗</span></a></li>
+        <li><a href="https://villagevoicenews.com/2022/12/30/stephanie-simon-an-inspiration-to-youth-in-stem/" target="_blank" rel="noopener"><span class="py">2022</span><span class="pt"><span class="po">Village Voice</span><span class="ph">Stephanie Simon: An inspiration to youth in STEM</span></span><span class="pa" aria-hidden="true">↗</span></a></li>
+        <li><a href="https://stabroeknews.com/2021/11/05/news/guyana/guyanese-stem-duo-nominated-for-international-awards" target="_blank" rel="noopener"><span class="py">2021</span><span class="pt"><span class="po">Stabroek News</span><span class="ph">Guyanese STEM duo nominated for international awards</span></span><span class="pa" aria-hidden="true">↗</span></a></li>
+        <li><a href="https://villagevoicenews.com/2021/10/31/guyanese-nominated-for-prestigious-stem-awards/" target="_blank" rel="noopener"><span class="py">2021</span><span class="pt"><span class="po">Village Voice</span><span class="ph">Guyanese nominated for prestigious STEM awards</span></span><span class="pa" aria-hidden="true">↗</span></a></li>
+        <li><a href="https://guyanachronicle.com/2020/09/10/guyana-scores-silver-and-bronze/" target="_blank" rel="noopener"><span class="py">2020</span><span class="pt"><span class="po">Guyana Chronicle</span><span class="ph">Guyana scores silver and bronze</span></span><span class="pa" aria-hidden="true">↗</span></a></li>
+        <li><a href="https://guyanachronicle.com/2020/09/06/trifinity-solutions-celebrated-world-entrepreneurs-day-with-virtual-panel-discussion/" target="_blank" rel="noopener"><span class="py">2020</span><span class="pt"><span class="po">Guyana Chronicle</span><span class="ph">Trifinity Solutions celebrated 'World Entrepreneurs' Day' with virtual panel discussion</span></span><span class="pa" aria-hidden="true">↗</span></a></li>
+        <li><a href="https://education.gov.gy/en/index.php/media2/external-news/1874-equipping-the-nation-s-youths-for-the-future" target="_blank" rel="noopener"><span class="py">2018</span><span class="pt"><span class="po">Ministry of Education</span><span class="ph">Equipping the nation's youths for the future</span></span><span class="pa" aria-hidden="true">↗</span></a></li>
+        <li><a href="https://op.gov.gy/four-stemguyana-team-members-pay-courtesy-call-on-first-lady-ahead-of-trip-to-georgia-tech/" target="_blank" rel="noopener"><span class="py">2018</span><span class="pt"><span class="po">Office of the President</span><span class="ph">Four STEMGuyana team members pay courtesy call on First Lady ahead of trip to Georgia Tech</span></span><span class="pa" aria-hidden="true">↗</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap contact">
+      <div class="contact-side">
+        <span class="label">Contact</span>
+        <h2>Let's work together.</h2>
+        <p>I welcome enquiries about development projects, AI-in-education collaborations, workshops and speaking engagements.</p>
+        <div class="email-row"><code id="email">jacintasimon98@gmail.com</code><button class="copy" type="button" id="copy-email">Copy</button></div>
+        <div class="ctas" style="margin-top:20px"><a class="btn" href="https://www.linkedin.com/in/stephanie-simon-10193a118/" target="_blank" rel="noopener">LinkedIn ↗</a><a class="btn" href="https://github.com/JacintaSimon" target="_blank" rel="noopener">GitHub ↗</a></div>
+      </div>
+      <form id="contact-form" novalidate>
+        <div class="row">
+          <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required><div class="err" id="e-name"></div></div>
+          <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required><div class="err" id="e-email"></div></div>
+        </div>
+        <input type="text" name="_gotcha" id="f-gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+        <div class="field"><label for="f-topic">What's this about?</label>
+          <select id="f-topic" name="topic"><option>Development project</option><option>Employment opportunity</option><option>AI in education / research</option><option>Speaking, workshop or mentorship</option><option>Other</option></select></div>
+        <div class="field"><label for="f-msg">Message</label><textarea id="f-msg" name="message" required placeholder="A few lines about what you need, timelines and budget if you have them."></textarea><div class="err" id="e-msg"></div></div>
+        <div class="form-foot">
+          <p class="note">By sending, you agree to the <button type="button" class="linkbtn" data-open-privacy>privacy notice</button>.</p>
+          <button class="btn primary" type="submit" id="f-send">Send message</button>
+        </div>
+        <div id="f-status" hidden></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Stephanie Simon. All rights reserved.</span><span>Views and work shown here are my own and do not represent my employers.</span><button type="button" class="linkbtn" data-open-privacy>Privacy notice</button><span class="soc"><a href="https://github.com/JacintaSimon" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/stephanie-simon-10193a118/" target="_blank" rel="noopener">LinkedIn</a></span></div></footer>
+
+<dialog id="privacy" aria-labelledby="pv-title"><div class="dlg">
+  <button class="close" type="button" data-close>Close ✕</button>
+  <div><span class="label">Last updated November 2026</span><h3 id="pv-title" style="margin-top:10px">Privacy notice</h3></div>
+  <div class="cs">
+    <div><h4>What I collect</h4><p>When you use the contact form, I receive your name, email address, the topic you select and your message. I do not collect any other personal information through this site.</p></div>
+    <div><h4>Why I collect it</h4><p>I use this information only to read and reply to your enquiry. It is not used for marketing, sold, or shared with anyone else.</p></div>
+    <div><h4>How it is handled</h4><p>Messages are delivered to my email through Formspree, a third-party form service, which processes the data on my behalf under its own privacy policy. Messages are kept only as long as needed to respond and follow up.</p></div>
+    <div><h4>Cookies and storage</h4><p>This site does not use tracking or advertising cookies. It stores your Neon or Pastel style choice in your own browser so the site remembers it on your next visit; this never leaves your device.</p></div>
+    <div><h4>Your rights</h4><p>You may ask to see, correct or delete any message you have sent me. Email <strong>jacintasimon98@gmail.com</strong> and I will respond promptly.</p></div>
+  </div>
+</div></dialog>
+
+<dialog id="dlg" aria-labelledby="dlg-title"><div class="dlg" id="dlg-body"></div></dialog>
+
+<script>
+/* ---- Contact form → email ----
+   When hosted on your own domain, create a free form at formspree.io (or similar),
+   paste its endpoint below, and submissions arrive in your inbox. */
+const FORM_ENDPOINT = "https://formspree.io/f/xnppypbj";
+const OWNER_EMAIL = "jacintasimon98@gmail.com";
+
+const projects = [
+  {t:"Personal Finance App",y:"Live web app",s:"Track income, expenses and monthly budgets across accounts.",tags:["Python","FastAPI","PostgreSQL","Chart.js","Docker"],c:"p3",img:"img/fin-dashboard.webp",link:"https://finance-app-b81o.onrender.com/ui/",gstack:true,
+   gallery:[["img/fin-dashboard.webp","Dashboard with monthly income, expenses, net, account balances and spending by category"],["img/fin-transactions.webp","Transactions page with account and category management, filters and pagination"],["img/fin-budgets.webp","Monthly budgets with progress toward each category limit"],["img/fin-login.webp","Login and registration screen"]],
+   role:"Full-stack developer",problem:"Many people track spending informally, which makes it difficult to see where money goes each month or whether they are keeping within their limits.",
+   approach:"Built a deployed web application with user registration and login, multiple accounts, custom income and expense categories, and a transaction history that can be filtered by date, category and account. A monthly dashboard summarises income, expenses and net balance, with a chart of spending by category, and a budgets page tracks progress against each category limit. The backend is a Python FastAPI service with a PostgreSQL database managed through SQLAlchemy and Alembic migrations. Authentication uses JWT tokens with Argon2 password hashing, the frontend is built in HTML, CSS and JavaScript with Chart.js, and the API is tested with pytest.",
+   outcome:"The application is containerised with Docker and Docker Compose and deployed live on Render, giving users a single place to record transactions, review monthly totals and monitor their budgets.",k:[["FastAPI","Python backend"],["JWT + Argon2","secure authentication"],["Docker","deployed on Render"]]},
+  {t:"AI Peer Assistant for Mathematics",y:"MSc research",s:"A human-centred AI companion for primary maths learners, with a teacher dashboard.",tags:["AI","HCI","Figma","EdTech"],c:"p5",img:"img/ai-peer-mockup.webp",gstack:true,
+   gallery:[["img/ai-peer-mockup.webp","Figma mockup: teacher dashboard (left) and student-facing peer assistant (right)"]],
+   role:"Researcher & UX designer",problem:"Primary school students can become overwhelmed when practising mathematics alone, and many AI tutors add to cognitive load rather than reducing it. Teachers also have little visibility into where individual students are struggling.",
+   approach:"Designed the HCAI Peer Assistant Framework as two connected interfaces. Students work with a friendly peer avatar that offers short, scaffolded hints, visual supports such as fraction bars, and badges for progress. Teachers use a dashboard that flags at-risk students (for example, high hint dependency or disengagement), shows each student's recent AI interactions, maps class mastery by topic, and records follow-up notes.",
+   outcome:"Completed as my MSc thesis in Artificial Intelligence and prototyped in Figma, contributing a design framework for AI peer support in early mathematics education that keeps the teacher informed and in control.",k:[["MSc","thesis project"],["Figma","interactive mockup"],["2","student & teacher views"]]},
+  {t:"Ignite Caribbean Card Generator",y:"Web tool",s:"A browser-based generator for branded 10th Anniversary social media cards.",tags:["HTML","CSS","JavaScript"],c:"p1",img:"img/card-generator.webp",gstack:true,
+   gallery:[["img/card-generator.webp","Generator interface with category and format controls, headshot upload and a live 9:16 story preview"]],
+   role:"Developer & designer",problem:"The Ignite Caribbean 10th Anniversary needed consistent, on-brand cards for honorees, judges, alumni, committee members and sponsors across several social platforms, without designing each one by hand.",
+   approach:"Built an HTML, CSS and JavaScript generator with six card categories (Honoree, Judge, Alumni, Committee, Sponsor and Special), each with its own colour treatment and label. Users choose a 1:1 square format for Instagram feed and LinkedIn or a 9:16 format for Stories and Reels, then add a headshot by clicking, dragging and dropping, or pasting. The card updates in a live preview at full 1080 × 1920 resolution.",
+   outcome:"The organising team could produce consistent, branded cards quickly for the anniversary campaign, keeping every post aligned to the 10th Anniversary identity.",k:[["6","card categories"],["2","social formats"],["1080×1920","story output"]]},
+  {t:"Ignite Caribbean Digital E-Magazine",y:"Interactive publication",s:"A multi-page, flip-style digital magazine for the 10th Anniversary.",tags:["HTML","Interaction","Editorial"],c:"p4",img:"img/emag-cover.webp",
+   credit:"Pages reproduced with the permission of Ignite Caribbean.",gallery:[["img/emag-cover.webp","Commemorative edition cover"],["img/emag-honorees.webp","Class of 2026 honorees and an individual honoree spread"],["img/emag-judges.webp","Distinguished judges profile pages"]],
+   role:"Developer & content designer",problem:"The anniversary needed a shareable publication that celebrated a decade of honorees and alumni.",
+   approach:"Produced an interactive flip-style e-magazine alongside cohort spotlights and alumni “Then / Now / Next” profiles, and managed related updates on the WordPress site.",
+   outcome:"Delivered a digital keepsake that the organisation could share online with its community and partners.",k:[["Multi-page","flip format"],["Alumni","profile series"],["WordPress","site updates"]]},
+];
+
+// abstract mini-UI thumbnails, built from blocks
+const layouts = [
+  b=>`<div class="bar" style="width:40%"></div><div style="display:flex;gap:8px;flex:1"><div class="blk" style="flex:1"></div><div class="blk" style="flex:2;padding:10px;display:grid;gap:6px;align-content:start"><div class="bar"></div><div class="bar" style="width:70%"></div><div class="acc" style="height:22px;width:45%;margin-top:auto"></div></div></div>`,
+  b=>`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;flex:1"><div class="blk"></div><div class="acc"></div><div class="blk"></div><div class="blk"></div><div class="blk"></div><div class="acc" style="opacity:.4"></div></div>`,
+  b=>`<div class="bar" style="width:30%"></div><div class="blk" style="flex:1;padding:12px;display:grid;gap:8px;align-content:start"><div class="bar"></div><div class="bar"></div><div class="bar" style="width:60%"></div></div><div class="acc" style="height:26px"></div>`,
+  b=>`<div class="blk" style="flex:1;position:relative;overflow:hidden"><svg viewBox="0 0 100 50" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%"><polyline points="0,40 15,32 30,36 45,20 60,26 75,12 100,18" fill="none" stroke="var(--accent)" stroke-width="2" vector-effect="non-scaling-stroke"/></svg></div><div style="display:flex;gap:8px"><div class="blk" style="flex:1;height:28px"></div><div class="blk" style="flex:1;height:28px"></div><div class="blk" style="flex:1;height:28px"></div></div>`,
+  b=>`<div style="display:flex;gap:8px;flex:1;align-items:end"><div class="acc" style="flex:1;height:70%"></div><div class="blk" style="flex:1;height:45%"></div><div class="acc" style="flex:1;height:90%;opacity:.6"></div><div class="blk" style="flex:1;height:30%"></div><div class="acc" style="flex:1;height:55%"></div></div><div class="bar"></div>`,
+  b=>`<div style="display:flex;gap:10px;align-items:center"><div class="acc" style="width:34px;height:34px;border-radius:50%"></div><div class="bar" style="flex:1"></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;flex:1"><div class="blk"></div><div class="blk"></div></div>`
+];
+
+const grid = document.getElementById('grid');
+grid.innerHTML = projects.map((p,i)=>`
+  <button class="card" type="button" data-i="${i}" aria-label="Read case study: ${p.t}">
+    <div class="thumb${p.img?' has-img':''}" style="background:var(--${p.c})">${p.img?`<img src="${p.img}" alt="${p.t} cover" loading="lazy">`:layouts[i]()}</div>
+    <div>
+      <div class="meta"><h3>${p.t}</h3><span class="yr">${p.y}</span></div>
+      <p>${p.s}</p>
+    </div>
+    <div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+  </button>`).join('');
+
+const dlg = document.getElementById('dlg'), body = document.getElementById('dlg-body');
+grid.addEventListener('click', e=>{
+  const c = e.target.closest('.card'); if(!c) return;
+  const p = projects[c.dataset.i];
+  body.innerHTML = `<button class="close" type="button" id="dlg-close">Close ✕</button>
+    <div><span class="label">${p.y} · ${p.role}</span><h3 id="dlg-title" style="margin-top:10px">${p.t}</h3></div>
+    <p class="lede">${p.s}</p>
+    <div class="kpis">${p.k.map(([v,l])=>`<div class="kpi"><strong>${v}</strong><span>${l}</span></div>`).join('')}</div>
+    ${p.gallery?`<div class="gal${p.gstack?' stack':''}">${p.gallery.map(([src,cap])=>`<figure><img src="${src}" alt="${cap}" loading="lazy"><figcaption>${cap}</figcaption></figure>`).join('')}</div>`:''}
+    ${p.credit?`<p class="note" style="margin-top:-8px">${p.credit}</p>`:''}
+    <div class="cs"><div><h4>Problem</h4><p>${p.problem}</p></div><div><h4>Approach</h4><p>${p.approach}</p></div><div><h4>Outcome</h4><p>${p.outcome}</p></div></div>
+    <div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+    ${p.link?`<a class="btn primary" style="justify-self:start" href="${p.link}" target="_blank" rel="noopener">View live app →</a>`:''}`;
+  dlg.showModal();
+  document.getElementById('dlg-close').onclick = ()=>dlg.close();
+});
+dlg.addEventListener('click', e=>{ if(e.target===dlg) dlg.close(); });
+
+const pv = document.getElementById('privacy');
+document.querySelectorAll('[data-open-privacy]').forEach(b=>b.addEventListener('click',()=>pv.showModal()));
+pv.querySelector('[data-close]').addEventListener('click',()=>pv.close());
+pv.addEventListener('click', e=>{ if(e.target===pv) pv.close(); });
+
+/* style toggle: Pastel = light, Neon = dark; defaults to system */
+const root = document.documentElement;
+function current(){ const a = root.getAttribute('data-theme'); return a || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
+function sync(){ const c = current(); document.querySelectorAll('.toggle button').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.set===c))); }
+try{ const saved = localStorage.getItem('look'); if(saved) root.setAttribute('data-theme', saved); }catch(e){}
+document.querySelectorAll('.toggle button').forEach(b=>b.addEventListener('click',()=>{
+  root.setAttribute('data-theme', b.dataset.set); try{ localStorage.setItem('look', b.dataset.set); }catch(e){} sync();
+}));
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', sync);
+new MutationObserver(sync).observe(root,{attributes:true,attributeFilter:['data-theme']});
+sync();
+
+/* copy email */
+document.getElementById('copy-email').addEventListener('click', e=>{
+  const btn = e.currentTarget;
+  navigator.clipboard.writeText(OWNER_EMAIL).then(()=>{ btn.textContent='Copied'; setTimeout(()=>btn.textContent='Copy',1600); })
+    .catch(()=>{ const r=document.createRange(); r.selectNodeContents(document.getElementById('email')); const s=getSelection(); s.removeAllRanges(); s.addRange(r); });
+});
+
+/* contact form */
+const form = document.getElementById('contact-form'), status = document.getElementById('f-status');
+function check(){
+  const n=form.name.value.trim(), m=form.email.value.trim(), t=form.message.value.trim();
+  document.getElementById('e-name').textContent = n ? '' : 'Please add your name.';
+  document.getElementById('e-email').textContent = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m) ? '' : 'Enter an email like name@example.com.';
+  document.getElementById('e-msg').textContent = t.length>=10 ? '' : 'Write at least a sentence so I can help.';
+  return n && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m) && t.length>=10;
+}
+form.addEventListener('submit', async e=>{
+  e.preventDefault();
+  if(!check()) return;
+  const data = {name:form.name.value.trim(), email:form.email.value.trim(), topic:form.topic.value, message:form.message.value.trim(), _gotcha:form._gotcha.value};
+  const send = document.getElementById('f-send');
+  status.hidden = false; status.className='';
+  if(FORM_ENDPOINT){
+    send.disabled = true; send.textContent = 'Sending…';
+    try{
+      const r = await fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(data)});
+      if(!r.ok) throw 0;
+      status.className='done'; status.textContent = `Thanks, ${data.name}. Your message is in my inbox and I'll reply to ${data.email} soon.`;
+      form.reset();
+    }catch(err){
+      fallback(data);
+    }
+    send.disabled = false; send.textContent = 'Send message';
+  } else fallback(data);
+});
+function fallback(data){
+    const subject = encodeURIComponent(`${data.topic} — from ${data.name}`);
+    const bodyTxt = encodeURIComponent(`${data.message}\n\n${data.name}\n${data.email}`);
+    status.className='done';
+    status.innerHTML = `The form couldn't send your message from here. <a href="mailto:${OWNER_EMAIL}?subject=${subject}&body=${bodyTxt}">Open it in your email app</a>, or send it to <strong>${OWNER_EMAIL}</strong>.`;
+}
+
+
+/* ---------- motion ---------- */
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const nav = document.getElementById('nav');
+  const tl = document.querySelector('.timeline');
+  function onScroll(){
+    const h = document.documentElement.scrollHeight - innerHeight;
+    nav.style.setProperty('--p', h>0 ? Math.min(1, scrollY/h) : 0);
+    nav.classList.toggle('scrolled', scrollY>8);
+    if(tl){ const r = tl.getBoundingClientRect(); const v = (innerHeight*0.7 - r.top)/r.height; tl.style.setProperty('--tl', Math.max(0, Math.min(1, v))); }
+  }
+  addEventListener('scroll', onScroll, {passive:true}); addEventListener('resize', onScroll); onScroll();
+
+  // active nav link
+  const links = [...document.querySelectorAll('.links a[href^="#"]')];
+  const map = new Map(links.map(a=>[a.getAttribute('href').slice(1), a]));
+  if('IntersectionObserver' in window){
+    const so = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ links.forEach(a=>a.removeAttribute('aria-current')); const a = map.get(e.target.id); if(a) a.setAttribute('aria-current','true'); } }), {rootMargin:'-45% 0px -50% 0px'});
+    map.forEach((a,id)=>{ const sec = document.getElementById(id); if(sec) so.observe(sec); });
+  }
+  if(reduce) return;
+
+  // hero spotlight
+  const hero = document.getElementById('hero');
+  hero.addEventListener('pointermove', e=>{ const r = hero.getBoundingClientRect(); hero.style.setProperty('--hx', (e.clientX-r.left)+'px'); hero.style.setProperty('--hy', (e.clientY-r.top)+'px'); });
+
+  // role rotator (typed)
+  const rot = document.getElementById('rot');
+  const words = ['programmer','computer science educator','AI-in-education researcher','STEM community builder'];
+  let wi = 0, ci = words[0].length, del = true;
+  function tick(){
+    const w = words[wi];
+    if(del){ ci--; rot.textContent = w.slice(0,ci); if(ci===0){ del=false; wi=(wi+1)%words.length; } setTimeout(tick, 38); }
+    else { const n = words[wi]; ci++; rot.textContent = n.slice(0,ci); if(ci===n.length){ del=true; setTimeout(tick, 2200); } else setTimeout(tick, 70); }
+  }
+  setTimeout(tick, 2400);
+
+  // card tilt + spotlight
+  if(matchMedia('(hover: hover)').matches){
+    document.getElementById('grid').addEventListener('pointermove', e=>{
+      const c = e.target.closest('.card'); if(!c) return;
+      const t = c.querySelector('.thumb'), r = t.getBoundingClientRect();
+      const x = (e.clientX-r.left)/r.width, y = (e.clientY-r.top)/r.height;
+      t.style.setProperty('--mx', x*100+'%'); t.style.setProperty('--my', y*100+'%');
+      t.style.transform = `perspective(900px) rotateX(${(0.5-y)*7}deg) rotateY(${(x-0.5)*9}deg) translateY(-4px)`;
+    });
+    document.getElementById('grid').addEventListener('pointerout', e=>{
+      const c = e.target.closest('.card'); if(c && !c.contains(e.relatedTarget)) c.querySelector('.thumb').style.transform='';
+    });
+  }
+
+  // scroll reveals: content stays visible at rest; only off-screen items animate as they approach
+  if(!('IntersectionObserver' in window)) return;
+  const sel = '.sec-head, .card, .timeline li, .role, .subgrid > div, .vid, .press li, .about-text, .contact-side, #contact-form, .facts > div';
+  const ro = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('reveal-in'); ro.unobserve(e.target); } }), {rootMargin:'0px 0px 160px 0px'});
+  document.querySelectorAll(sel).forEach(el=>{
+    if(el.getBoundingClientRect().top < innerHeight + 160) return;
+    const sib = [...el.parentElement.children].indexOf(el);
+    el.style.animationDelay = (Math.min(sib,6)*70)+'ms';
+    ro.observe(el);
+  });
+})();
+</script>
 </body>
 </html>
